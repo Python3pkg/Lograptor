@@ -183,13 +183,13 @@ def get_fmt_results(resdict, limit=5, sep='::', fmt=None):
                     fmtkey.append(fmt.format(key[i]))
                 else:
                     fmtkey.append(key[i])
-            reslist.append(u'{0}({1})'.format(sep.join(fmtkey), resdict[key]))
+            reslist.append('{0}({1})'.format(sep.join(fmtkey), resdict[key]))
         else:
-            reslist.append(u'{0}({1})'.format(sep.join(key), resdict[key]))
+            reslist.append('{0}({1})'.format(sep.join(key), resdict[key]))
     else:
         return reslist
     if fmt is not None:
-        reslist.append(fmt.format(u'[%d more skipped]' % (len(resdict)-len(reslist))))
+        reslist.append(fmt.format('[%d more skipped]' % (len(resdict)-len(reslist))))
     else:
-        reslist.append(u'[%d more skipped]' % (len(resdict)-len(reslist)))
+        reslist.append('[%d more skipped]' % (len(resdict)-len(reslist)))
     return reslist

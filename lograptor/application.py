@@ -39,7 +39,7 @@ try:
     import configparser
 except ImportError:
     # Fall back for Python 2.x
-    import ConfigParser as configparser
+    import configparser as configparser
 
 try:
     from collections import OrderedDict
@@ -208,7 +208,7 @@ class AppRule(object):
             val = self.key_gids.index(valfld)
             if usemax:
                 i = 0 
-                for key in sorted(results.keys(), key=lambda x: (int(x[val]), x[pos]),
+                for key in sorted(list(results.keys()), key=lambda x: (int(x[val]), x[pos]),
                                   reverse=True)[:num]:
                     top[i] = [int(key[val]), [key[pos]]]
                     i += 1
@@ -216,7 +216,7 @@ class AppRule(object):
                 
         value = None
         tot = 0
-        for key in sorted(results.keys(), key=lambda x: (x[pos])):
+        for key in sorted(list(results.keys()), key=lambda x: (x[pos])):
             if value is None or value != key[pos]:
                 classify()
                 value = key[pos]
@@ -328,9 +328,9 @@ class AppLogParser(object):
     # Default values for application config files
     default_config = {
         'main': {
-            'desc': u'${appname}',
-            'tags': u'${appname}',
-            'files': u'${logdir}/messages',
+            'desc': '${appname}',
+            'tags': '${appname}',
+            'files': '${logdir}/messages',
             'enabled': True,
             'priority': 1,
         }
@@ -344,7 +344,7 @@ class AppLogParser(object):
         """
         filter_names = set()
         for filter_group in filters:
-            for name, pattern in filter_group.items():
+            for name, pattern in list(filter_group.items()):
                 try:
                     re.compile(pattern)
                 except RegexpCompileError:
@@ -506,7 +506,7 @@ class AppLogParser(object):
             for filter_group in self._filters:
                 new_pattern = pattern
                 filter_keys = list()
-                for fltname, fltpat in filter_group.items():
+                for fltname, fltpat in list(filter_group.items()):
                     next_pattern = string.Template(new_pattern).safe_substitute({fltname: fltpat})
                     if next_pattern != new_pattern:
                         filter_keys.append(fltname)
@@ -528,7 +528,7 @@ class AppLogParser(object):
                 self.rules.append(AppRule(option, new_pattern, filter_keys))
                 self.has_filters = True
                 logger.debug('Add filter rule "{0}" ({1}): {2}'
-                             .format(option, u', '.join(filter_keys), new_pattern))
+                             .format(option, ', '.join(filter_keys), new_pattern))
                 logger.debug('Rule "{0}" gids : {1}'.format(option, self.rules[-1].key_gids))
 
     def purge_unmatched_threads(self, event_time=0):

@@ -41,7 +41,7 @@ try:
     import configparser
 except ImportError:
     # Fall back for Python 2.x
-    import ConfigParser as configparser
+    import configparser as configparser
 
 try:
     from collections import OrderedDict
@@ -67,8 +67,8 @@ class ConfigMap(UserDict):
         self.defaults = {}
         if default_config is not None:
             logger.debug('Setting configuration defaults')
-            for sect_defaults in default_config.values():
-                for key, value in sect_defaults.items():
+            for sect_defaults in list(default_config.values()):
+                for key, value in list(sect_defaults.items()):
                     if key not in self.defaults:
                         self.defaults[key] = value
                     else:
@@ -87,12 +87,12 @@ class ConfigMap(UserDict):
 
         # Read configuration from file
         logger.debug('Reading other entries from configuration file')
-        for sect, sect_options in default_config.items():
+        for sect, sect_options in list(default_config.items()):
             # Skip unnamed (None) section
             if sect is None:
                 continue
 
-            for opt, value in sect_options.items():
+            for opt, value in list(sect_options.items()):
                 logger.debug("Get option '%s' from section '%s'" % (opt, sect))
                 try:
                     if isinstance(value, bool):
@@ -145,7 +145,7 @@ class ConfigMap(UserDict):
             if not changed:
                 break
 
-        for opt, value in self.defaults.items():
+        for opt, value in list(self.defaults.items()):
             if isinstance(value, str):
                 self.defaults[opt] = self._interpolate(value)
 

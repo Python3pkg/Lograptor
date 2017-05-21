@@ -26,7 +26,7 @@ internal caching for Lograptor's application class instances.
 # @Author Davide Brunato <brunato@sissa.it>
 #
 ##
-from __future__ import print_function
+
 
 import re
 import socket
@@ -55,7 +55,7 @@ class OutMap(object):
         self.hostsmap = self.maps['host']
         self.uidsmap = self.maps['uid']
         self.base_gid_pattern = re.compile('^([a-zA-Z_]+)')
-        self.ip_pattern = re.compile(u'({0}|{1})'.format(config['ipv4_pattern'], config['ipv6_pattern']))
+        self.ip_pattern = re.compile('({0}|{1})'.format(config['ipv4_pattern'], config['ipv6_pattern']))
 
     def map_value(self, gid, value):
         """
@@ -70,7 +70,7 @@ class OutMap(object):
                     return self.maps[base_gid][value]
                 else:
                     k = (len(self.maps[base_gid]) + 1) % self.mapmax
-                    new_item = u'{0}_{1:0{2}d}'.format(base_gid.upper(), k, self.mapexp)
+                    new_item = '{0}_{1:0{2}d}'.format(base_gid.upper(), k, self.mapexp)
                     self.maps[base_gid][value] = new_item
                     return new_item
             except KeyError:
@@ -82,7 +82,7 @@ class OutMap(object):
             host = self.gethost(ip_match.group(1))
             if host == ip_match.group(1) or value.startswith(host):
                 return value
-            return u''.join([
+            return ''.join([
                 value[:ip_match.start(1)],
                 self.gethost(ip_match.group(1)),
                 value[ip_match.end(1):]])
@@ -125,7 +125,7 @@ class OutMap(object):
                 parts.append(values[gid])
                 k = match.end(gid)
         parts.append(s[k:])
-        return u"".join(parts)
+        return "".join(parts)
 
     def gethost(self, ip_addr):
         """

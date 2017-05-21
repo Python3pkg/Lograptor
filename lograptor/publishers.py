@@ -108,7 +108,7 @@ class MailPublisher(BasePublisher):
         logger.debug('gpg_encrypt={0}'.format(self.gpg_encrypt))        
 
     def __repr__(self):
-        return u'{0}({1}: mailto={2})'.format(self.section, self.name, u','.join(self.mailto))
+        return '{0}({1}: mailto={2})'.format(self.section, self.name, ','.join(self.mailto))
 
     def publish(self, title, report_parts, rawfh):
         """
@@ -174,7 +174,7 @@ class MailPublisher(BasePublisher):
         if self.gpg_encrypt:
             logger.info('Encrypting the message')
 
-            from StringIO import StringIO
+            from io import StringIO
             try:
                 import gpgme
 
@@ -271,7 +271,7 @@ class MailPublisher(BasePublisher):
         root_part['To'] = ', '.join(self.mailto)
         root_part['Subject'] = title
         root_part['Message-Id'] = make_msgid()
-        root_part['X-Mailer'] = u'{0}-{1}'.format(lograptor.Lograptor.__name__, __version__)
+        root_part['X-Mailer'] = '{0}-{1}'.format(lograptor.Lograptor.__name__, __version__)
         
         logger.debug('Creating the message as string')
         msg = root_part.as_string()
@@ -287,7 +287,7 @@ class MailPublisher(BasePublisher):
         else:   
             mail_smtp(self.smtpserv, self.fromaddr, self.mailto, msg)
 
-        print('Mailed the report to: {0}'.format(','.join(self.mailto)))
+        print(('Mailed the report to: {0}'.format(','.join(self.mailto))))
 
 
 class FilePublisher(BasePublisher):
@@ -347,7 +347,7 @@ class FilePublisher(BasePublisher):
         logger.debug('filename={0}'.format(self.filename))
 
     def __repr__(self):
-        return u'{0}({1}: pubdir={2}, expire_in={3})'.format(
+        return '{0}({1}: pubdir={2}, expire_in={3})'.format(
             self.section, self.name, self.pubdir, self.expire)
 
     def prune_old(self):
@@ -379,8 +379,8 @@ class FilePublisher(BasePublisher):
 
                 if stamp < expire_limit:
                     shutil.rmtree(os.path.join(path, entry))
-                    print('File Publisher: Pruned old dir: {0}'.format(
-                                entry))
+                    print(('File Publisher: Pruned old dir: {0}'.format(
+                                entry)))
                 else:
                     logger.info('{0} is still active'.format(entry))
             else:
@@ -426,7 +426,7 @@ class FilePublisher(BasePublisher):
             fh = open(repfile, 'w')
             fh.write(report_parts[i].text)
             fh.close()
-            print('Report {0}saved in: {1}'.format('part ' if ext == 'csv' else '', repfile))
+            print(('Report {0}saved in: {1}'.format('part ' if ext == 'csv' else '', repfile)))
 
         if self.notify:
             logger.info('Creating an email message')
@@ -438,7 +438,7 @@ class FilePublisher(BasePublisher):
 
             eml['Subject'] = '{0} (report notification)'.format(title)
             eml['To'] = ', '.join(self.notify)
-            eml['X-Mailer'] = u'{0}-{1}'.format(lograptor.Lograptor.__name__, __version__)
+            eml['X-Mailer'] = '{0}-{1}'.format(lograptor.Lograptor.__name__, __version__)
 
             msg = eml.as_string()
 
@@ -448,7 +448,7 @@ class FilePublisher(BasePublisher):
             else:
                 mail_smtp(self.smtpserv, self.fromaddr, self.notify, msg)
 
-            print('Notification mailed to: {0}'.format(','.join(self.notify)))
+            print(('Notification mailed to: {0}'.format(','.join(self.notify))))
 
         if self.rawlogs:
             logfilen = '{0}.log'.format(self.filename)
@@ -458,7 +458,7 @@ class FilePublisher(BasePublisher):
             outfh = open(logfile, 'w+b')
             do_chunked_gzip(rawfh, outfh, logfilen)
             outfh.close()
-            print('Gzipped logs saved in: {0}'.format(logfile))
+            print(('Gzipped logs saved in: {0}'.format(logfile)))
 
         # Purge old reports
         self.prune_old()

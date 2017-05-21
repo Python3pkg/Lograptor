@@ -42,15 +42,15 @@ class my_sdist(distutils.command.sdist.sdist):
             print("Copy lograptor.py -> scripts/lograptor")
             shutil.copyfile("lograptor.py", "scripts/lograptor")
 
-        print("Copy {0}Lograptor.pdf -> doc/Lograptor.pdf".format(PDF_SOURCE_DIR))
+        print(("Copy {0}Lograptor.pdf -> doc/Lograptor.pdf".format(PDF_SOURCE_DIR)))
         os.system("cp -p {0}Lograptor.pdf doc/Lograptor.pdf".format(PDF_SOURCE_DIR))
-        print("Compress {0}lograptor.8 -> man/lograptor.8.gz".format(MAN_SOURCE_DIR))
+        print(("Compress {0}lograptor.8 -> man/lograptor.8.gz".format(MAN_SOURCE_DIR)))
         os.system("gzip -c {0}lograptor.8 > man/lograptor.8.gz".format(MAN_SOURCE_DIR))
-        print("Compress {0}lograptor.conf.5 -> man/lograptor.conf.5.gz".format(MAN_SOURCE_DIR))
+        print(("Compress {0}lograptor.conf.5 -> man/lograptor.conf.5.gz".format(MAN_SOURCE_DIR)))
         os.system("gzip -c {0}lograptor.conf.5 > man/lograptor.conf.5.gz".format(MAN_SOURCE_DIR))
-        print("Compress {0}lograptor-apps.5 -> man/lograptor-apps.5.gz".format(MAN_SOURCE_DIR))
+        print(("Compress {0}lograptor-apps.5 -> man/lograptor-apps.5.gz".format(MAN_SOURCE_DIR)))
         os.system("gzip -c {0}lograptor-apps.5 > man/lograptor-apps.5.gz".format(MAN_SOURCE_DIR))
-        print("Compress {0}lograptor-examples.8 -> man/lograptor-examples.8.gz".format(MAN_SOURCE_DIR))
+        print(("Compress {0}lograptor-examples.8 -> man/lograptor-examples.8.gz".format(MAN_SOURCE_DIR)))
         os.system("gzip -c {0}lograptor-examples.8 > man/lograptor-examples.8.gz".format(MAN_SOURCE_DIR))
         distutils.command.sdist.sdist.run(self)
 
@@ -104,18 +104,18 @@ class my_bdist_rpm(distutils.command.bdist_rpm.bdist_rpm):
         if distro_name in ['centos', 'redhat', 'fedora']:
             for filename in filelist:
                 newname = filename[:-11] + tag + filename[-11:]
-                print(msg.format(filename, newname))
+                print((msg.format(filename, newname)))
                 os.rename(filename, newname)
         elif distro_name in ['ubuntu', 'debian']:
             for filename in filelist:
-                print('alien -k {0}'.format(filename))
+                print(('alien -k {0}'.format(filename)))
                 os.system('/usr/bin/alien -k {0}'.format(filename))
-                print('removing {0}'.format(filename))
+                print(('removing {0}'.format(filename)))
                 os.unlink(filename)
                 if distro[0] == 'Ubuntu':
                     filename = filename[:-11].replace('-', '_', 1) + '_all.deb'
                     newname = filename[:-8] + tag + '_all.deb'
-                    print(msg.format(filename, newname))
+                    print((msg.format(filename, newname)))
                     os.rename(filename, newname)
         
 

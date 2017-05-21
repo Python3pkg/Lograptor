@@ -151,10 +151,10 @@ class TimeRange(object):
         self.h2 = int(tr[6:8])
         self.m2 = int(tr[9:])
 
-        if (self.h1 not in range(0, 23) or
-                self.h2 not in range(0, 23) or
-                self.m1 not in range(0, 59) or
-                self.m2 not in range(0, 59) or
+        if (self.h1 not in list(range(0, 23)) or
+                self.h2 not in list(range(0, 23)) or
+                self.m1 not in list(range(0, 59)) or
+                self.m2 not in list(range(0, 59)) or
                 self.h1 > self.h2 or
                 (self.h1 == self.h2 and self.m1 > self.m2)):
             raise ValueError

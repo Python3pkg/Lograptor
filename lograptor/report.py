@@ -28,7 +28,7 @@ of Lograptor instance.
 # @Author Davide Brunato <brunato@sissa.it>
 #
 ##
-from __future__ import print_function
+
 
 import logging
 import re
@@ -49,7 +49,7 @@ try:
     import configparser
 except ImportError:
     # Fall back for Python 2.x
-    import ConfigParser as configparser
+    import configparser as configparser
 
 import lograptor.info
 import lograptor.publishers
@@ -143,7 +143,7 @@ class ReportItem(UserDict):
                         self.rules[opt] = rule
                         break
                 else:
-                    msg = u"Skip report rule '%s' because use undefined or not active app rule!" % self.name
+                    msg = "Skip report rule '%s' because use undefined or not active app rule!" % self.name
                     raise lograptor.RuleMissingError(msg)
                 self.data[opt] = value
 
@@ -314,18 +314,18 @@ class ReportItem(UserDict):
         """
         text = None
         if self.function == 'total':
-            text = u'<table border="0" width="100%" rules="cols" cellpadding="2">\n'\
+            text = '<table border="0" width="100%" rules="cols" cellpadding="2">\n'\
                    '<tr><th colspan="2" align="left"><h3><font color="{1}">'\
                    '{0}</font></h3></th></tr>\n'\
                    .format(lograptor.utils.htmlsafe(self.title.strip()), self.color)
 
             for res in self.results:
-                text = u'{0}<tr><td valign="top" align="right">{1}</td>'\
+                text = '{0}<tr><td valign="top" align="right">{1}</td>'\
                        '<td valign="top" width="90%">{2}</td></tr>'\
                        .format(text, res[0], res[1])
 
         elif self.function == 'top':
-            text = u'<table border="0" width="100%" rules="cols" cellpadding="2">\n'\
+            text = '<table border="0" width="100%" rules="cols" cellpadding="2">\n'\
                    '<tr><th colspan="2" align="left"><h3><font color="{1}">'\
                    '{0}</font></h3></th></tr>\n'\
                    .format(lograptor.utils.htmlsafe(self.title.strip()), self.color)
@@ -333,15 +333,15 @@ class ReportItem(UserDict):
             if self.results[0] is not None:
                 for res in self.results:
                     if res is not None:
-                        text = u'{0}<tr><td valign="top" align="right">{1}</td>'\
+                        text = '{0}<tr><td valign="top" align="right">{1}</td>'\
                                '<td valign="top" width="90%">{2}</td></tr>'\
                                .format(text, res[0], ', '.join(res[1]))
             else:
-                text = u'{0}<tr><td valign="top" align="left">{1}</td>'\
+                text = '{0}<tr><td valign="top" align="left">{1}</td>'\
                        .format(text, "None")
                 
         elif self.function == 'table':
-            text = u'<h3><font color="{1}">{0}</font></h3>'\
+            text = '<h3><font color="{1}">{0}</font></h3>'\
                    '<table width="100%" rules="cols" cellpadding="2">\n'\
                    '<tr bgcolor="#aaaaaa">'\
                    .format(lograptor.utils.htmlsafe(self.title.strip()), self.color)
@@ -352,7 +352,7 @@ class ReportItem(UserDict):
                        '<font color="black">{1}</font></th>'\
                        .format(text, headers[i].strip('"'))
 
-            text = u'{0}</tr>\n'.format(text)
+            text = '{0}</tr>\n'.format(text)
             
             oddflag = False
             lastval = ""            
@@ -360,34 +360,34 @@ class ReportItem(UserDict):
                 if lastval != res[0]:
                     oddflag = not oddflag
                     if oddflag:
-                        text = u'{0}<tr bgcolor="#dddddd">'.format(text)
+                        text = '{0}<tr bgcolor="#dddddd">'.format(text)
                     else:
-                        text = u'{0}<tr>'.format(text)
+                        text = '{0}<tr>'.format(text)
 
-                    text = u'{0}<td valign="top" width="15%">{1}</td>'\
+                    text = '{0}<td valign="top" width="15%">{1}</td>'\
                            .format(text, res[0])
                 else:
                     if oddflag:
-                        text = u'{0}<tr bgcolor="#dddddd">'.format(text)
+                        text = '{0}<tr bgcolor="#dddddd">'.format(text)
                     else:
-                        text = u'{0}<tr>'.format(text)
+                        text = '{0}<tr>'.format(text)
 
-                    text = u'{0}<td valign="top" width="15%">&nbsp;</td>'.format(text)
+                    text = '{0}<td valign="top" width="15%">&nbsp;</td>'.format(text)
                 lastval = res[0]
                 
                 for i in range(1, len(headers)-1):
-                    text = u'{0}<td valign="top" width="15%">{1}</td>'.format(text, res[i])
-                lastcol = get_fmt_results(res[-1], limit=10, fmt=u'<font color="darkred">{0}</font>')
+                    text = '{0}<td valign="top" width="15%">{1}</td>'.format(text, res[i])
+                lastcol = get_fmt_results(res[-1], limit=10, fmt='<font color="darkred">{0}</font>')
 
-                if lastcol[-1].find(u" more skipped]") > -1:
-                    text = u'{0}<td valign="top" width="{1}%">{2} {3}</td></tr>\n'\
+                if lastcol[-1].find(" more skipped]") > -1:
+                    text = '{0}<td valign="top" width="{1}%">{2} {3}</td></tr>\n'\
                            .format(text, 100-15*(len(headers)-1),
-                                   u', '.join(lastcol[:-1]), lastcol[-1])
+                                   ', '.join(lastcol[:-1]), lastcol[-1])
                 else:
-                    text = u'{0}<td valign="top" width="{1}%">{2}</td></tr>\n'\
-                           .format(text, 100-15*(len(headers)-1), u', '.join(lastcol))
+                    text = '{0}<td valign="top" width="{1}%">{2}</td></tr>\n'\
+                           .format(text, 100-15*(len(headers)-1), ', '.join(lastcol))
 
-        self.html_text = u'{0}</table>\n<p>\n'.format(text)
+        self.html_text = '{0}</table>\n<p>\n'.format(text)
 
     def make_text_csv(self):
         """
@@ -397,8 +397,8 @@ class ReportItem(UserDict):
         import io
 
         try:
-            import cStringIO
-            out = cStringIO.StringIO()
+            import io
+            out = io.StringIO()
         except ImportError:
             import io
             out = io.StringIO()            
@@ -423,9 +423,9 @@ class ReportItem(UserDict):
                 row = list(res[:-1])
                 lastcol = get_fmt_results(res[-1], limit=10)
                 if lastcol[-1][0] == '[' and lastcol[-1][-1] == ']':
-                    row.append(u'{0} {1}'.format(u', '.join(lastcol[:-1]), lastcol[-1]))
+                    row.append('{0} {1}'.format(', '.join(lastcol[:-1]), lastcol[-1]))
                 else:
-                    row.append(u', '.join(lastcol))
+                    row.append(', '.join(lastcol))
                 rows.append(row)
                 
             writer.writerows(rows)
@@ -454,7 +454,7 @@ class Subreport(object):
         """
         Make of subreport items from results
         """
-        for (appname, app) in sorted(apps.items(), key=lambda x: (x[1].priority, x[0])):
+        for (appname, app) in sorted(list(apps.items()), key=lambda x: (x[1].priority, x[0])):
             logger.info('Getting report results from "{0}"'.format(appname))
             
             for repitem in app.repitems:
@@ -688,7 +688,7 @@ class Report(object):
         """
         Set run statistics for the report (timestamps, totals, etc.).
         """
-        for key, value in stats.items():
+        for key, value in list(stats.items()):
             self.stats[key] = value
             logger.debug('{0}={1}'.format(key, value))
 
@@ -708,14 +708,14 @@ class Report(object):
             'patterns': [pattern.pattern for pattern in self.patterns],
             'pattern_file': self.config['pattern_file'],
             'hosts': self.config['hosts'],
-            'apps': u', '.join([u'%s(%d)' % (app.name, app.counter)
-                                for app in apps.values() if app.counter > 0]),
+            'apps': ', '.join(['%s(%d)' % (app.name, app.counter)
+                                for app in list(apps.values()) if app.counter > 0]),
             'version': lograptor.info.__version__
             }
 
         logger.debug('Provide filtering informations')
         filters = ''
-        for key, flt in self.filters.items():
+        for key, flt in list(self.filters.items()):
             if flt != '':
                 filters = '{0}--{1}="{2}", '.format(filters, key, flt)
         
@@ -744,7 +744,7 @@ class Report(object):
                 report_parts.extend(self.make_csv_tables())
         
         if self.publishers:
-            print(u'\n--- Publishing report ---')
+            print('\n--- Publishing report ---')
             for publisher in self.publishers:
                 logger.info('Invoking publisher "{0}"'.format(publisher.name))
                 publisher.publish(self.title, report_parts, rawfh)

@@ -44,7 +44,7 @@ class LogParser(object):
         include mandatory named groups.
         """
         self.parser = re.compile(pattern)
-        self.LogData = namedtuple('LogData', self.parser.groupindex.keys())
+        self.LogData = namedtuple('LogData', list(self.parser.groupindex.keys()))
         self.app = app
         self.fields = tuple(self.parser.groupindex.keys())
 
@@ -70,7 +70,7 @@ class ParserRFC3164(LogParser):
             ])
         extra = set(self.fields) - set(rfc3164_fields)
         if extra:
-            msg = u'no RFC 3164 fields in pattern: {0}'.format(extra)
+            msg = 'no RFC 3164 fields in pattern: {0}'.format(extra)
             raise ConfigError(msg)
             
 
@@ -87,5 +87,5 @@ class ParserRFC5424(LogParser):
             ])
         extra = set(self.fields) - set(rfc5424_fields)
         if extra:
-            msg = u'no RFC 5424 fields in pattern: {0}'.format(extra)
+            msg = 'no RFC 5424 fields in pattern: {0}'.format(extra)
             raise ConfigError(msg)

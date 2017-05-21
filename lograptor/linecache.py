@@ -26,7 +26,7 @@ application class instances.
 # @Author Davide Brunato <brunato@sissa.it>
 #
 ##
-from __future__ import print_function
+
 
 try:
     from collections import UserDict
@@ -83,7 +83,7 @@ class LineCache(object):
         cache = self.data
         counter = 0
         
-        for thread in cache.keys():
+        for thread in list(cache.keys()):
             if cache[thread].pattern_match and cache[thread].full_match:
                 if max_threads is not None:
                     max_threads -= 1
@@ -112,7 +112,7 @@ class LineCache(object):
         """
         cache = self.data
         counter = 0
-        for thread in cache.keys():
+        for thread in list(cache.keys()):
             if abs(event_time - cache[thread].end_time) > 3600:
                 if cache[thread].pattern_match and cache[thread].full_match:
                     if max_threads is not None:

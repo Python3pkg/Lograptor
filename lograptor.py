@@ -223,7 +223,7 @@ def main(is_batch):
                 len(sys.argv) == 1 or
                 (len(sys.argv) == 2 and sys.argv[1].startswith('--conf=')) or
                 (len(sys.argv) == 3 and sys.argv[1] == '--conf')):
-            print(my_raptor.get_configuration())
+            print((my_raptor.get_configuration()))
             my_raptor.cleanup()
             sys.exit(0)
 
@@ -255,7 +255,7 @@ def main(is_batch):
     except OptionError as e:
         cli_parser.error(e)
     except (ConfigError, FormatError, FileMissingError, FileAccessError) as e:
-        sys.exit(u"ERROR: {0}\nExiting ...".format(e))
+        sys.exit("ERROR: {0}\nExiting ...".format(e))
     except KeyboardInterrupt:
         print("\nCtrl-C pressed, terminate the process ...")
         sys.exit(1)

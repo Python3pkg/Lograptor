@@ -69,8 +69,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Lograptor'
-copyright = u'2012-2014, Davide Brunato - Scuola Internazionale Superiore di Studi Avanzati, Trieste (Italy)'
+project = 'Lograptor'
+copyright = '2012-2014, Davide Brunato - Scuola Internazionale Superiore di Studi Avanzati, Trieste (Italy)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -223,8 +223,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'Lograptor.tex', u'Lograptor Documentation',
-   u'Davide Brunato', 'manual'),
+  ('index', 'Lograptor.tex', 'Lograptor Documentation',
+   'Davide Brunato', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -255,10 +255,10 @@ latex_use_parts = True
 # (source start file, name, description, authors, manual section).
 man_pages = [
     #('index', 'lograptor', u'Lograptor Documentation', [u'Davide Brunato'], 1),
-    ('lograptor', 'lograptor', u'Pattern search tool for syslog files', [u'Davide Brunato'], 8),
-    ('lograptor-conf', 'lograptor.conf', u'Lograptor configuration file', [u'Davide Brunato'], 5),
-    ('lograptor-apps', 'lograptor-apps', u"Configure Lograptor's applications", [u'Davide Brunato'], 5),
-    ('lograptor-examples', 'lograptor-examples', u'Lograptor usage examples', [u'Davide Brunato'], 8),
+    ('lograptor', 'lograptor', 'Pattern search tool for syslog files', ['Davide Brunato'], 8),
+    ('lograptor-conf', 'lograptor.conf', 'Lograptor configuration file', ['Davide Brunato'], 5),
+    ('lograptor-apps', 'lograptor-apps', "Configure Lograptor's applications", ['Davide Brunato'], 5),
+    ('lograptor-examples', 'lograptor-examples', 'Lograptor usage examples', ['Davide Brunato'], 8),
 ]
 
 # If true, show URL addresses after external links.
@@ -271,8 +271,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Lograptor', u'Lograptor Documentation',
-   u'Davide Brunato', 'Lograptor', 'One line description of project.',
+  ('index', 'Lograptor', 'Lograptor Documentation',
+   'Davide Brunato', 'Lograptor', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -292,10 +292,10 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'Lograptor'
-epub_author = u'Davide Brunato'
-epub_publisher = u'Davide Brunato'
-epub_copyright = u'2012-2014, Davide Brunato'
+epub_title = 'Lograptor'
+epub_author = 'Davide Brunato'
+epub_publisher = 'Davide Brunato'
+epub_copyright = '2012-2014, Davide Brunato'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'Lograptor'
